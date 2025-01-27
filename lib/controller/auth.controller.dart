@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:simpleapp/model/user.model.dart';
-import "dart:developer";
 import 'dart:convert';
 
 class AuthController extends ChangeNotifier {
@@ -29,7 +28,7 @@ class AuthController extends ChangeNotifier {
   // Future<void> getUsers() async {
   //   List users =
   //       jsonDecode(getStringAsync("users", defaultValue: "[]")) as List;
-  //   log("Users: $users");
+  //   print("Users: $users");
   // }
 
   void setUser(UserModel user) {
