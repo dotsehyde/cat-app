@@ -26,18 +26,29 @@ class AuthController extends ChangeNotifier {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+  // Future<void> getUsers() async {
+  //   List users =
+  //       jsonDecode(getStringAsync("users", defaultValue: "[]")) as List;
+  //   log("Users: $users");
+  // }
+
+  void setUser(UserModel user) {
+    this.user = user;
+    notifyListeners();
+  }
+
   Future<bool> login() async {
 //check if the email and password are correct
     List users =
         jsonDecode(getStringAsync("users", defaultValue: "[]")) as List;
-    for (var user in users) {
-      UserModel userData = UserModel.fromMap(jsonDecode(user));
+    for (var u in users) {
+      UserModel userData = UserModel.fromMap(jsonDecode(u));
       if (userData.email == emailController.text &&
           userData.password == passwordController.text) {
-        user = userData;
         emailController.clear();
         passwordController.clear();
         log("UserFound: ${user.toString()}");
+        setUser(userData);
         return true;
       } else {
         continue;
@@ -61,7 +72,7 @@ class AuthController extends ChangeNotifier {
     emailController.clear();
     passwordController.clear();
     confirmPasswordController.clear();
-    notifyListeners();
+    setUser(userData);
     return true;
   }
 

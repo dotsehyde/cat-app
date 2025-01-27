@@ -80,6 +80,7 @@ class LoginPage extends StatelessWidget {
                       }
                       return null;
                     },
+                    obscureText: !authState.showPassword,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -91,7 +92,7 @@ class LoginPage extends StatelessWidget {
                             onPressed: () {
                               authState.togglePassword();
                             },
-                            icon: Icon(authState.showPassword
+                            icon: Icon(!authState.showPassword
                                 ? Icons.visibility
                                 : Icons.visibility_off)),
                         prefixIcon: Icon(Icons.lock),

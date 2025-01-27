@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:simpleapp/controller/auth.controller.dart';
-import 'package:simpleapp/controller/home.controller.dart';
 import 'package:simpleapp/page/home.dart';
 import 'package:simpleapp/page/login.dart';
 

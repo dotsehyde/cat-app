@@ -24,62 +24,53 @@ class HomePage extends StatelessWidget {
                   Text(
                     "Welcome, ${authState.user?.name ?? "N/A"}.\nToday's cat image is ready!",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium!,
-                  ).paddingTop(20),
+                    style: Theme.of(context).textTheme.headlineSmall!,
+                  ).paddingTop(30),
                   TextButton(
                       onPressed: () {
-                        authState.signout().then((_) {
-                          //Do other Ui checks
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog.adaptive(
-                                  title: Text("Log out"),
-                                  content:
-                                      Text("Are you sure you want to log out?"),
-                                  actions: [
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                          foregroundColor: Colors.red,
-                                        ),
-                                        onPressed: () {
-                                          authState.signout().then((_) {
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        LoginPage()));
-                                          }).catchError((e) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    duration:
-                                                        Duration(seconds: 2),
-                                                    showCloseIcon: true,
-                                                    content: Text(
-                                                      e.toString(),
-                                                    )));
-                                          });
-                                        },
-                                        child: Text("Yes")),
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                          foregroundColor: Colors.blue,
-                                        ),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("No"))
-                                  ],
-                                );
-                              });
-                        }).catchError((e) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 2),
-                              showCloseIcon: true,
-                              content: Text(
-                                e.toString(),
-                              )));
-                        });
+                        //Do other Ui checks
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog.adaptive(
+                                title: Text("Log out"),
+                                content:
+                                    Text("Are you sure you want to log out?"),
+                                actions: [
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                        foregroundColor: Colors.red,
+                                      ),
+                                      onPressed: () {
+                                        authState.signout().then((_) {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      LoginPage()));
+                                        }).catchError((e) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                  showCloseIcon: true,
+                                                  content: Text(
+                                                    e.toString(),
+                                                  )));
+                                        });
+                                      },
+                                      child: Text("Yes")),
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                        foregroundColor: Colors.blue,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("No"))
+                                ],
+                              );
+                            });
                       },
                       style: TextButton.styleFrom(
                         minimumSize: Size(size.maxWidth, 50),
@@ -90,7 +81,7 @@ class HomePage extends StatelessWidget {
                         "Log out",
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold),
-                      )).paddingTop(10).paddingSymmetric(horizontal: 15),
+                      )).paddingTop(20).paddingSymmetric(horizontal: 15),
                 ],
               );
             },
@@ -101,7 +92,11 @@ class HomePage extends StatelessWidget {
                     return Text("Error: ${snap.error}");
                   }
                   if (snap.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator.adaptive();
+                    return CircularProgressIndicator.adaptive(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation(
+                          Theme.of(context).primaryColor),
+                    ).paddingSymmetric(vertical: 20);
                   }
                   return Container(
                           margin: EdgeInsets.symmetric(horizontal: 15),

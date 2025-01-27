@@ -17,8 +17,6 @@ class HomeController extends ChangeNotifier {
     }
     var res =
         await dio.get("https://api.thecatapi.com/v1/images/search?limit=1");
-    print(res.data);
-
     if (res.statusCode != 200) {
       return Future.error("Could not fetch image");
     }
