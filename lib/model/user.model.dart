@@ -1,23 +1,28 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class UserModel {
   final String name;
   final String email;
+  final String phone;
   final String password;
   UserModel({
     required this.name,
     required this.email,
+    required this.phone,
     required this.password,
   });
 
   UserModel copyWith({
     String? name,
     String? email,
+    String? phone,
     String? password,
   }) {
     return UserModel(
       name: name ?? this.name,
       email: email ?? this.email,
+      phone: phone ?? this.phone,
       password: password ?? this.password,
     );
   }
@@ -26,6 +31,7 @@ class UserModel {
     return <String, dynamic>{
       'name': name,
       'email': email,
+      'phone': phone,
       'password': password,
     };
   }
@@ -34,6 +40,7 @@ class UserModel {
     return UserModel(
       name: map['name'] as String,
       email: map['email'] as String,
+      phone: map['phone'] as String,
       password: map['password'] as String,
     );
   }
@@ -44,8 +51,9 @@ class UserModel {
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'UserModel(name: $name, email: $email, password: $password)';
+  String toString() {
+    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password)';
+  }
 
   @override
   bool operator ==(covariant UserModel other) {
@@ -53,9 +61,12 @@ class UserModel {
 
     return other.name == name &&
         other.email == email &&
+        other.phone == phone &&
         other.password == password;
   }
 
   @override
-  int get hashCode => name.hashCode ^ email.hashCode ^ password.hashCode;
+  int get hashCode {
+    return name.hashCode ^ email.hashCode ^ phone.hashCode ^ password.hashCode;
+  }
 }

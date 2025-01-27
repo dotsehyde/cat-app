@@ -22,6 +22,7 @@ class AuthController extends ChangeNotifier {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
@@ -61,6 +62,7 @@ class AuthController extends ChangeNotifier {
         jsonDecode(getStringAsync("users", defaultValue: "[]")) as List;
     UserModel userData = UserModel(
       name: nameController.text,
+      phone: phoneController.text,
       email: emailController.text,
       password: passwordController.text,
     );

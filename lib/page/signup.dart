@@ -107,6 +107,35 @@ class SignUpPage extends StatelessWidget {
                           cursorColor: Theme.of(context).primaryColor,
                           validator: (val) {
                             if (val!.isEmpty) {
+                              return 'Phone number is required';
+                            }
+                            if (val.length != 10) {
+                              return 'Invalid phone number';
+                            }
+                            return null;
+                          },
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.phone,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(color: Colors.black),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 10),
+                              prefixIcon: Icon(Icons.phone),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).primaryColor)),
+                              hintText: 'Phone',
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).primaryColor))),
+                          controller: authState.phoneController,
+                        ).paddingTop(20),
+                        TextFormField(
+                          cursorColor: Theme.of(context).primaryColor,
+                          validator: (val) {
+                            if (val!.isEmpty) {
                               return 'Password is required';
                             }
                             if (val.length < 5) {
