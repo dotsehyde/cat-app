@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:simpleapp/controller/auth.controller.dart';
 import 'package:simpleapp/page/home.dart';
 import 'package:simpleapp/page/signup.dart';
+import 'package:simpleapp/translations/locale_keys.g.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -12,6 +14,27 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        actions: [
+          PopupMenuButton(
+                  color: Theme.of(context).cardColor,
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                          value: "en", child: Text("🏴󠁧󠁢󠁥󠁮󠁧󠁿 English")),
+                      PopupMenuItem(value: "fr", child: Text("🇫🇷 Français")),
+                    ];
+                  },
+                  onSelected: (String value) {
+                    context.setLocale(Locale(value));
+                  },
+                  child: Icon(Icons.language,
+                      color: Theme.of(context).primaryColor))
+              .paddingRight(10)
+        ],
+        elevation: 0,
+      ),
       body: SafeArea(
         child: LayoutBuilder(builder: (context, size) {
           return Form(
@@ -33,7 +56,7 @@ class LoginPage extends StatelessWidget {
                     width: size.maxWidth,
                     alignment: Alignment.center,
                     child: Text(
-                      "Login",
+                      LocaleKeys.login_text.tr(),
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
@@ -49,10 +72,10 @@ class LoginPage extends StatelessWidget {
                         .copyWith(color: Colors.black),
                     validator: (val) {
                       if (val!.isEmpty) {
-                        return 'Email is required';
+                        return LocaleKeys.email_required.tr();
                       }
                       if (!val.validateEmail()) {
-                        return 'Invalid email';
+                        return LocaleKeys.email_invalid.tr();
                       }
                       return null;
                     },
@@ -63,7 +86,7 @@ class LoginPage extends StatelessWidget {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Theme.of(context).primaryColor)),
-                        hintText: 'Email',
+                        hintText: LocaleKeys.email.tr(),
                         border: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Theme.of(context).primaryColor))),
@@ -73,10 +96,10 @@ class LoginPage extends StatelessWidget {
                     cursorColor: Theme.of(context).primaryColor,
                     validator: (val) {
                       if (val!.isEmpty) {
-                        return 'Password is required';
+                        return LocaleKeys.password_required.tr();
                       }
                       if (val.length < 5) {
-                        return 'Password must be at least 5 characters';
+                        return LocaleKeys.password_length.tr();
                       }
                       return null;
                     },
@@ -99,7 +122,7 @@ class LoginPage extends StatelessWidget {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Theme.of(context).primaryColor)),
-                        hintText: 'Password',
+                        hintText: LocaleKeys.password.tr(),
                         border: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Theme.of(context).primaryColor))),
@@ -131,14 +154,14 @@ class LoginPage extends StatelessWidget {
                         backgroundColor: Theme.of(context).primaryColor,
                       ),
                       child: Text(
-                        "Login",
+                        LocaleKeys.login_text.tr(),
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       )).paddingBottom(10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an account?"),
+                      Text(LocaleKeys.login_have_account.tr()),
                       TextButton(
                           style: TextButton.styleFrom(
                             foregroundColor: Theme.of(context).primaryColor,
@@ -149,7 +172,7 @@ class LoginPage extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => SignUpPage()));
                           },
-                          child: Text("Signup")),
+                          child: Text(LocaleKeys.login_signup.tr())),
                     ],
                   ).withWidth(size.maxWidth),
                 ],

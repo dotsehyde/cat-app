@@ -1,0 +1,14 @@
+{
+  "email": "Adresse email",
+  "password": "Mot de passe",
+  "fullName": "Nom et prénom",
+  "phone": "Numéro de téléphone",
+  "cPassword": "Confirmez le mot de passe",
+  "login_have_account": "Vous n'avez pas de compte?",
+  "login_text": "Se connecter",
+  "login_signup": "S'inscrire",
+  "password_required": "Le mot de passe est requis",
+  "email_required": "L'e-mail est requis",
+  "email_invalid": "Adresse e-mail invalide",
+  "password_length": "Le mot de passe doit contenir au moins 5 caractères"
+}

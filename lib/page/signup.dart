@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:simpleapp/controller/auth.controller.dart';
 import 'package:simpleapp/page/home.dart';
 import 'package:simpleapp/page/login.dart';
+import 'package:simpleapp/translations/locale_keys.g.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
@@ -14,6 +16,27 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        actions: [
+          PopupMenuButton(
+                  color: Theme.of(context).cardColor,
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                          value: "en", child: Text("🏴󠁧󠁢󠁥󠁮󠁧󠁿 English")),
+                      PopupMenuItem(value: "fr", child: Text("🇫🇷 Français")),
+                    ];
+                  },
+                  onSelected: (String value) {
+                    context.setLocale(Locale(value));
+                  },
+                  child: Icon(Icons.language,
+                      color: Theme.of(context).primaryColor))
+              .paddingRight(10)
+        ],
+        elevation: 0,
+      ),
       body: SafeArea(
         child: LayoutBuilder(builder: (context, size) {
           return AnimatedBuilder(
@@ -40,7 +63,7 @@ class SignUpPage extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: 10),
                           alignment: Alignment.center,
                           child: Text(
-                            "Sign Up",
+                            LocaleKeys.login_signup.tr(),
                             textAlign: TextAlign.left,
                             style: Theme.of(context)
                                 .textTheme
@@ -66,7 +89,7 @@ class SignUpPage extends StatelessWidget {
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(top: 10),
                               prefixIcon: Icon(Icons.person),
-                              hintText: 'Name',
+                              hintText: LocaleKeys.fullName.tr(),
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor)),
@@ -97,7 +120,7 @@ class SignUpPage extends StatelessWidget {
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor)),
-                              hintText: 'Email',
+                              hintText: LocaleKeys.email.tr(),
                               border: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor))),
@@ -136,10 +159,10 @@ class SignUpPage extends StatelessWidget {
                           cursorColor: Theme.of(context).primaryColor,
                           validator: (val) {
                             if (val!.isEmpty) {
-                              return 'Password is required';
+                              return LocaleKeys.password_required.tr();
                             }
                             if (val.length < 5) {
-                              return 'Password must be at least 5 characters';
+                              return LocaleKeys.password_length.tr();
                             }
                             return null;
                           },
@@ -162,7 +185,7 @@ class SignUpPage extends StatelessWidget {
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor)),
-                              hintText: 'Password',
+                              hintText: LocaleKeys.password.tr(),
                               border: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(context).primaryColor))),
